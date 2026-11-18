@@ -1,0 +1,31 @@
+name: Infinity HI-FI Wave Studio contracts
+on:
+  pull_request:
+    paths:
+      - 'lab/**'
+      - 'test/studio-*.test.mjs'
+      - '.github/workflows/wave-studio.yml'
+      - 'index.html'
+  push:
+    branches: [main]
+    paths:
+      - 'lab/**'
+      - 'test/studio-*.test.mjs'
+      - '.github/workflows/wave-studio.yml'
+jobs:
+  node-tests:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check browser modules
+        run: |
+          node --check lab/signal-core.mjs
+          node --check lab/wave-core.mjs
+          node --check lab/studio.mjs
+      - name: Signal, Wave and source privacy contracts
+        run: node --test test/studio-core.test.mjs test/studio-source.test.mjs
