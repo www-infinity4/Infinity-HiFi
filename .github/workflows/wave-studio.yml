@@ -28,4 +28,4 @@ jobs:
           node --check lab/wave-core.mjs
           node --check lab/studio.mjs
       - name: Signal, Wave and source privacy contracts
-        run: node --test test/studio-core.test.mjs test/studio-source.test.mjs
+        run: node --test test/studio-core.test.mjs test/studio-source.test.mjs test/studio-research.test.mjs
